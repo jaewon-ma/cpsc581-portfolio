@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Portfolio, CPSC 581</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Kalam:wght@400;700&display=swap">
+<style>
+/* Layout: graph-paper sketchbook. Sticky section nav, one reading column, sketch figures break out wider. */
+:root {
+  --paper: #f7f6ef;
+  --grid: rgba(70, 110, 160, 0.10);
+  --ink: #1d1c22;
+  --ink-soft: #55535f;
+  --cubey: #8a2be2;      /* the avatar's marker colour in the sketches */
+  --pen: #1f6fd1;        /* blue annotation pen */
+  --pass: #2f9a3c;
+  --fail: #d1352b;
+  --card: #ffffff;
+  --line: #d9d6cb;
+  --todo-bg: #fff6cc;
+  --todo-line: #c9a400;
+  --todo-ink: #5b4a00;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-hand: "Kalam", "Comic Sans MS", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #17161c; --grid: rgba(140, 170, 220, 0.07); --ink: #ecebf2; --ink-soft: #a9a7b6;
+    --cubey: #b77cff; --pen: #6aa8ff; --pass: #5cc56a; --fail: #ff6b60;
+    --card: #211f28; --line: #34323e; --todo-bg: #2f2a12; --todo-line: #a88a1a; --todo-ink: #f1df8f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #17161c; --grid: rgba(140, 170, 220, 0.07); --ink: #ecebf2; --ink-soft: #a9a7b6;
+  --cubey: #b77cff; --pen: #6aa8ff; --pass: #5cc56a; --fail: #ff6b60;
+  --card: #211f28; --line: #34323e; --todo-bg: #2f2a12; --todo-line: #a88a1a; --todo-ink: #f1df8f;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font: 17px/1.6 var(--f-body);
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.col { max-width: 68ch; }
+
+/* nav */
+nav.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1.5px solid var(--ink); }
+nav.top .wrap { display: flex; align-items: center; gap: 20px; padding-block: 12px; overflow-x: auto; }
+nav.top .mark { font: 800 1.05rem var(--f-display); white-space: nowrap; color: var(--ink); text-decoration: none; }
+nav.top ul { display: flex; gap: 4px; list-style: none; margin: 0 0 0 auto; padding: 0; }
+nav.top a.l { display: block; padding: 4px 10px; border-radius: 4px; color: var(--ink-soft); text-decoration: none; font-size: .9rem; white-space: nowrap; }
+nav.top a.l:hover, nav.top a.l.on { color: var(--ink); background: var(--card); box-shadow: inset 0 0 0 1.5px var(--ink); }
+
+a { color: var(--pen); }
+:focus-visible { outline: 3px solid var(--cubey); outline-offset: 2px; }
+
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.1; margin: 0; }
+h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.01em; }
+h3 { font-size: 1.3rem; font-weight: 700; }
+.eyebrow { font: 700 .78rem var(--f-body); text-transform: uppercase; letter-spacing: .12em; color: var(--ink-soft); }
+.hand { font-family: var(--f-hand); }
+p { margin: 0; }
+.stack { display: flex; flex-direction: column; gap: 18px; }
+
+/* hero */
+header.hero { padding-block: 56px 40px; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; }
+.hero-grid > * { min-width: 0; }
+.hero p.lede { font-size: 1.2rem; color: var(--ink-soft); max-width: 46ch; }
+.hero .cubey-frame { position: relative; background: var(--card); border: 1.5px solid var(--ink); border-radius: 6px; padding: 10px; transform: rotate(1.2deg); box-shadow: 6px 6px 0 var(--cubey); }
+.hero .cubey-frame img { display: block; width: 100%; border-radius: 3px; }
+.hero .cubey-frame figcaption { font: 1rem var(--f-hand); color: var(--cubey); padding: 6px 4px 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: .85rem; padding: 3px 10px; border: 1.5px solid var(--ink); border-radius: 999px; background: var(--card); }
+
+/* sections */
+section.sec { padding-block: 64px; border-top: 1.5px dashed var(--line); }
+.sec-head { display: grid; gap: 10px; margin-bottom: 32px; }
+
+/* todo */
+.todo { background: var(--todo-bg); border: 2px dashed var(--todo-line); color: var(--todo-ink); border-radius: 6px; padding: 16px 18px; font-size: .95rem; }
+.todo strong:first-child { display: block; font: 700 .75rem var(--f-body); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; }
+.todo ul { margin: 6px 0 0; padding-left: 20px; }
+
+/* figures */
+.figs { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.figs.two { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+figure.sk { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+figure.sk button { all: unset; cursor: zoom-in; display: block; background: var(--card); border: 1.5px solid var(--ink); border-radius: 4px; overflow: hidden; aspect-ratio: 935 / 1210; max-width: 100%; }
+figure.sk button:focus-visible { outline: 3px solid var(--cubey); outline-offset: 3px; }
+figure.sk img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .25s; }
+figure.sk button:hover img { transform: scale(1.03); }
+@media (prefers-reduced-motion: reduce) { figure.sk img { transition: none; } }
+figure.sk figcaption { font-size: .92rem; color: var(--ink-soft); }
+figure.sk figcaption b { color: var(--ink); }
+
+/* verdicts (mirrors the ✓ / ✗ / ~ marks in the sketches) */
+.verdicts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.v { background: var(--card); border: 1.5px solid var(--line); border-radius: 6px; padding: 12px 14px; display: grid; grid-template-columns: 26px 1fr; gap: 4px 10px; align-items: start; }
+.v .m { font: 700 1.4rem/1 var(--f-hand); grid-row: span 2; }
+.v .m.ok { color: var(--pass); } .v .m.no { color: var(--fail); } .v .m.mid { color: #e08a00; }
+.v h4 { margin: 0; font: 700 1rem var(--f-body); }
+.v p { font-size: .9rem; color: var(--ink-soft); }
+
+/* process strip — real sequence, so numbered */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding-bottom: 22px; position: relative; }
+.steps li::before { content: counter(s); width: 34px; height: 34px; border: 1.5px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font: 700 .95rem var(--f-display); background: var(--card); position: relative; z-index: 1; }
+.steps li:not(:last-child)::after { content: ""; position: absolute; left: 17px; top: 34px; bottom: 0; border-left: 1.5px dashed var(--ink-soft); }
+.steps li > div { min-width: 0; padding-top: 4px; }
+.steps h4 { margin: 0 0 2px; font: 700 1.05rem var(--f-body); }
+.steps p { color: var(--ink-soft); font-size: .95rem; }
+
+/* HMW callout */
+.hmw { background: var(--card); border: 1.5px solid var(--ink); border-left: 0; border-radius: 0 6px 6px 0; padding: 20px 22px; position: relative; box-shadow: inset 6px 0 0 var(--cubey); padding-left: 28px; }
+.hmw p.q { font: 700 clamp(1.15rem, 2.4vw, 1.45rem)/1.35 var(--f-display); }
+.hmw p.a { margin-top: 10px; font: 1.15rem var(--f-hand); color: var(--cubey); }
+
+/* criteria */
+.criteria { display: flex; flex-wrap: wrap; gap: 10px; }
+.criteria span { font: 700 1.05rem var(--f-hand); color: var(--fail); border: 2px solid var(--fail); padding: 2px 12px; border-radius: 4px; background: var(--card); }
+
+/* table */
+.tbl-wrap { overflow-x: auto; border: 1.5px solid var(--ink); border-radius: 6px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: .95rem; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 700 .75rem var(--f-body); text-transform: uppercase; letter-spacing: .1em; color: var(--ink-soft); }
+tr:last-child td { border-bottom: 0; }
+td.mk { font: 700 1.2rem var(--f-hand); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+.two-col > * { min-width: 0; }
+
+.ilwi { display: grid; grid-template-columns: repeat(3, 1fr); border: 1.5px solid var(--ink); border-radius: 6px; background: var(--card); overflow: hidden; }
+.ilwi > div { padding: 12px 14px; border-right: 1.5px solid var(--ink); min-width: 0; }
+.ilwi > div:last-child { border-right: 0; }
+.ilwi h5 { margin: 0 0 4px; font: 700 1.05rem var(--f-hand); }
+.ilwi p { font-size: .9rem; color: var(--ink-soft); }
+
+footer { padding-block: 40px 60px; border-top: 1.5px solid var(--ink); color: var(--ink-soft); font-size: .9rem; }
+
+/* lightbox */
+dialog.lb { border: 0; padding: 0; background: transparent; max-width: min(92vw, 1000px); max-height: 92vh; }
+dialog.lb::backdrop { background: rgba(10, 10, 20, .82); }
+dialog.lb img { display: block; max-width: 100%; max-height: 84vh; border-radius: 4px; background: #fff; }
+dialog.lb p { color: #fff; margin-top: 8px; font-size: .95rem; }
+dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(--f-body); padding: 6px 12px; border-radius: 4px; border: 0; cursor: pointer; background: #fff; color: #111; }
+
+@media (max-width: 760px) {
+  .hero-grid, .two-col { grid-template-columns: 1fr; }
+  .ilwi { grid-template-columns: 1fr; }
+  .ilwi > div { border-right: 0; border-bottom: 1.5px solid var(--ink); }
+  .ilwi > div:last-child { border-bottom: 0; }
+  nav.top ul { margin-left: 0; }
+  body { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+
+<nav class="top" aria-label="Sections">
+  <div class="wrap">
+    <a class="mark" href="#top">[Your Name]</a>
+    <ul>
+      <li><a class="l" href="#philosophy">Philosophy</a></li>
+      <li><a class="l" href="#p1">Project 1</a></li>
+      <li><a class="l" href="#p2">Project 2 (in progress)</a></li>
+      <li><a class="l" href="#growth">Growth</a></li>
+      <li><a class="l" href="#ai">GenAI use</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="stack">
+      <span class="eyebrow">CPSC 581 · Fall 2026 · Design portfolio</span>
+      <h1>I sketch it badly first, then make it better on purpose.</h1>
+      <p class="lede">Concept sketches, critiques and revisions from my interaction design work this term. Each project shows the ideas I threw out and why, alongside the one we built.</p>
+      <div class="todo"><strong>To do</strong>Replace the headline and intro with your own one-line statement. Add your name in the nav bar and footer.</div>
+      <div class="chips" aria-label="Methods used">
+        <span class="chip">Concept sketching</span><span class="chip">Storyboards</span><span class="chip">How Might We</span><span class="chip">I like / I wish / What if</span><span class="chip">Criteria-based selection</span>
+      </div>
+    </div>
+    <figure class="cubey-frame">
+      <img src="img/lamp.jpg" alt="Hand-drawn ceiling light that dims and sparks with each click until a down for maintenance sign appears.">
+      <figcaption>The wearing-out light, Project 1</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+<!-- ============ PHILOSOPHY ============ -->
+<section class="sec" id="philosophy">
+  <div class="wrap">
+    <div class="sec-head col">
+      <span class="eyebrow">Design philosophy</span>
+      <h2>What I value, and how I work</h2>
+    </div>
+    <div class="col stack">
+      <div class="todo">
+        <strong>To do — write this in your own words</strong>
+        The brief asks you to explain and justify your design values, your approach, and the processes and tools you adopted or rejected. Some patterns visible in your sketches that you could build on (keep, change or delete them):
+        <ul>
+          <li>You judge ideas against named criteria (for example "intuitive for novice, low effort for expert, embodied and novel") rather than gut feel.</li>
+          <li>You mark ideas as clear, too basic, or "potential but difficult" and keep the rejected ones visible.</li>
+          <li>You changed a design after a teammate's critique (hand tracking to WASD + mouse).</li>
+          <li>You design for accessibility up front (voice <em>or</em> text for the expert).</li>
+        </ul>
+        This section is updated at each check-in, so add a dated note when your view changes. That is your growth evidence.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECT 1 ============ -->
+<section class="sec" id="p1">
+  <div class="wrap stack" style="gap:32px">
+    <div class="sec-head col">
+      <span class="eyebrow">Group Project 1 · Individual contributions</span>
+      <h2>Showing that something is wearing out</h2>
+      <p>Early concept sketches exploring how an object could show its state changing with each interaction, then signal that it needs to rest or be repaired.</p>
+    </div>
+
+    <div class="todo col"><strong>To do</strong>Add the one-sentence project brief, your team members, and what <em>you</em> specifically contributed.</div>
+
+    <div class="col stack">
+      <h3>Divergent concepts</h3>
+      <p>I sketched five loops of use and recovery, then marked each one before choosing a direction.</p>
+    </div>
+    <div class="verdicts">
+      <div class="v"><span class="m ok">✓</span><h4>Ceiling light</h4><p>Dims with each click until it shows "down for maintenance." Meaning is clear and versatile for the group.</p></div>
+      <div class="v"><span class="m no">✗</span><h4>Battery</h4><p>Drains, then recharges at the outlet. Too basic.</p></div>
+      <div class="v"><span class="m no">✗</span><h4>Moon phases</h4><p>Waxes and wanes in a cycle. Not a great fit.</p></div>
+      <div class="v"><span class="m mid">~</span><h4>Fighter's health bar</h4><p>Stick figure loses health and recovers. Has potential but would be hard to collaborate on.</p></div>
+    </div>
+
+    <div class="figs two">
+      <figure class="sk">
+        <button type="button" data-full="img/p1-1.jpg" aria-label="Enlarge sketch: divergent concepts"><img src="img/p1-1.jpg" alt="Sketch page: light, battery, moon and health-bar cycles, each marked with a check, cross or squiggle." loading="lazy"></button>
+        <figcaption><b>Sketch 1.1</b> · Four state cycles, each judged in the margin.</figcaption>
+      </figure>
+      <figure class="sk">
+        <button type="button" data-full="img/p1-2.jpg" aria-label="Enlarge sketch: light variations"><img src="img/p1-2.jpg" alt="Sketch page: variations on the light concept including a dimming fixture, sparks, a bulb and a pull-cord lamp, each ending in a repair sign." loading="lazy"></button>
+        <figcaption><b>Sketch 1.2</b> · Variations on the light: dimming, sparks, a bulb, a pull-cord lamp. Clicking before it's ready adds time to the repair timer.</figcaption>
+      </figure>
+    </div>
+
+    <div class="todo col"><strong>To do</strong>Add photos or a short video of the final prototype, the key design decisions and why, and two or three sentences on what you'd do differently.</div>
+  </div>
+</section>
+
+<!-- ============ PROJECT 2 ============ -->
+<section class="sec" id="p2">
+  <div class="wrap stack" style="gap:36px">
+    <div class="sec-head col">
+      <span class="eyebrow">Group Project 2 · In progress</span>
+      <h2>Cubey: an expert you can see, inside the CAD software</h2>
+      <p>A novice learning Blender gets help from a remote expert. Instead of sharing a screen, the expert appears as a small cube avatar that moves, points and reacts on the novice's own screen.</p>
+    </div>
+
+    <div class="hmw col">
+      <span class="eyebrow">How might we</span>
+      <p class="q">How can we embody communication from an expert to a novice user in CAD software without relying on the traditional screen-sharing method?</p>
+      <p class="a">→ Embody the expert as an avatar controlled by their physical movements and body language.</p>
+    </div>
+
+    <div class="col stack">
+      <h3>The process</h3>
+      <ol class="steps">
+        <li><div><h4>Brainstorm</h4><p>Four directions: an approval overlay, a "?" question cursor, recorded sessions the expert can grade, and an expert-controlled avatar.</p></div></li>
+        <li><div><h4>Critique each idea</h4><p>Ran I like / I wish / What if on every sketch. The overlay was cut as too much of a hindrance.</p></div></li>
+        <li><div><h4>Converge on the avatar</h4><p>Picked the avatar and borrowed the question cursor and hint ideas from the others.</p></div></li>
+        <li><div><h4>Set criteria and define the hints</h4><p>Wrote the selection criteria and storyboarded how the avatar guides without a second cursor.</p></div></li>
+        <li><div><h4>Choose a control method</h4><p>Compared webcam tracking, a motion-capture suit and keyboard hotkeys.</p></div></li>
+        <li><div><h4>Storyboard both sides, then revise</h4><p>Drew novice and expert views. A teammate's critique changed how the expert points.</p></div></li>
+      </ol>
+    </div>
+
+    <div class="figs">
+      <figure class="sk">
+        <button type="button" data-full="img/p2-01.jpg" aria-label="Enlarge sketch: brainstorm notes"><img src="img/p2-01.jpg" alt="Handwritten brainstorm list of four ideas for expert-novice guidance." loading="lazy"></button>
+        <figcaption><b>2.1</b> · Brainstorm notes. "I like this one, let's see how feasible."</figcaption>
+      </figure>
+      <figure class="sk">
+        <button type="button" data-full="img/p2-02.jpg" aria-label="Enlarge sketch: approval overlay"><img src="img/p2-02.jpg" alt="Interface sketch where a novice action waits for expert approval, with an I like I wish What if table." loading="lazy"></button>
+        <figcaption><b>2.2</b> · Approval overlay, like a Git pull request. Cut for slowing novices down.</figcaption>
+      </figure>
+      <figure class="sk">
+        <button type="button" data-full="img/p2-03.jpg" aria-label="Enlarge sketch: question cursor"><img src="img/p2-03.jpg" alt="Interface sketch of a novice using a question-mark cursor while the expert types a reply." loading="lazy"></button>
+        <figcaption><b>2.3</b> · "?" cursor so the novice can ask about any spot on screen.</figcaption>
+      </figure>
+      <figure class="sk">
+        <button type="button" data-full="img/p2-04.jpg" aria-label="Enlarge sketch: Cubey avatar"><img src="img/p2-04.jpg" alt="Interface sketch of the cube avatar Cubey on the novice's screen saying you're doing great, with four expressions below." loading="lazy"></button>
+        <figcaption><b>2.4</b> · The avatar. "What if you could move it with WASD?"</figcaption>
+      </figure>
+    </div>
+
+    <div class="ilwi" aria-label="Critique of the avatar idea">
+      <div><h5>I like</h5><p>How expressive this can be.</p></div>
+      <div><h5>I wish</h5><p>There was a way to move the avatar's position.</p></div>
+      <div><h5>What if</h5><p>You could move the avatar with WASD.</p></div>
+    </div>
+
+    <div class="two-col">
+      <div class="stack">
+        <h3>Why a cube?</h3>
+        <p>A cube is Blender's default object, so a "Clippy"-style cube is cute and relevant to the software. It is also much easier to animate than a full human avatar, and the novice can still read the expert's body language from it.</p>
+        <h3>Criteria</h3>
+        <div class="criteria"><span>Intuitive for novice</span><span>Low effort for expert</span><span>Embodied and novel</span></div>
+      </div>
+      <figure class="sk">
+        <button type="button" data-full="img/p2-05.jpg" aria-label="Enlarge sketch: hint storyboard"><img src="img/p2-05.jpg" alt="Problem statement, criteria and a six-panel storyboard of avatar hint behaviours." loading="lazy"></button>
+        <figcaption><b>2.5</b> · Hint behaviours. Looking at a button is ambiguous when buttons sit close together, so hints are two-tiered: look first, then point and highlight.</figcaption>
+      </figure>
+    </div>
+
+    <div class="stack">
+      <h3>How does the expert control the avatar?</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Option</th><th scope="col">Tradeoff</th><th scope="col">Decision</th></tr></thead>
+          <tbody>
+            <tr><td>Webcam + face/hand tracking</td><td>Low effort and inexpensive</td><td class="mk" style="color:var(--pass)">✓ chosen</td></tr>
+            <tr><td>Motion-capture suit</td><td>Precise, but arduous and expensive for the payoff</td><td class="mk" style="color:var(--fail)">✗</td></tr>
+            <tr><td>Keyboard hotkeys for preset actions</td><td>Less authentic than face/hand tracking, more work for the expert</td><td class="mk" style="color:var(--fail)">✗</td></tr>
+            <tr><td>Arrow keys to move the avatar</td><td>Adds depth when combined with the webcam</td><td class="mk" style="color:var(--pass)">✓ kept</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="figs">
+      <figure class="sk">
+        <button type="button" data-full="img/p2-06.jpg" aria-label="Enlarge sketch: control options"><img src="img/p2-06.jpg" alt="Comparison sketch of webcam tracking, motion capture suit and keyboard controls." loading="lazy"></button>
+        <figcaption><b>2.6</b> · Control options compared.</figcaption>
+      </figure>
+      <figure class="sk">
+        <button type="button" data-full="img/p2-07.jpg" aria-label="Enlarge sketch: novice point of view"><img src="img/p2-07.jpg" alt="Storyboard from the novice's view: Cubey asks how much help they want, then shows where to click." loading="lazy"></button>
+        <figcaption><b>2.7</b> · Novice view. The novice chooses "observe until I have questions" or "give me hints."</figcaption>
+      </figure>
+      <figure class="sk">
+        <button type="button" data-full="img/p2-08.jpg" aria-label="Enlarge sketch: expert side"><img src="img/p2-08.jpg" alt="Storyboard: Cubey says good job after the novice drags the object, then the expert's desk setup." loading="lazy"></button>
+        <figcaption><b>2.8</b> · Feedback to the novice, then the expert's side.</figcaption>
+      </figure>
+      <figure class="sk">
+        <button type="button" data-full="img/p2-09.jpg" aria-label="Enlarge sketch: expert pointing with webcam"><img src="img/p2-09.jpg" alt="Expert pointing at the webcam while the software mirrors the movement to the avatar, with a teammate's critique noted." loading="lazy"></button>
+        <figcaption><b>2.9</b> · First expert setup, with the teammate's critique in blue.</figcaption>
+      </figure>
+    </div>
+
+    <div class="two-col">
+      <div class="stack">
+        <span class="eyebrow" style="color:var(--pen)">Revision after critique</span>
+        <h3>From pointing at a webcam to WASD and a mouse</h3>
+        <p>A teammate pointed out that hand tracking is hard for precise pointing, especially if the expert doesn't have room to move their arms in view of the webcam, and it would be hard to highlight the exact button.</p>
+        <p>We moved avatar movement to WASD so the expert's right hand stays on the mouse. Left-click makes the avatar point at a spot. Right-click highlights a button or area. The expert's cursor is only visible on their own monitor. The webcam still drives the avatar's expressions, and the expert can speak or type, to accommodate accessibility needs such as a mute expert.</p>
+      </div>
+      <div class="figs" style="grid-template-columns:1fr 1fr">
+        <figure class="sk">
+          <button type="button" data-full="img/p2-10.jpg" aria-label="Enlarge sketch: revised controls"><img src="img/p2-10.jpg" alt="Revised sketch: expert uses WASD to move the avatar and the mouse to point and highlight." loading="lazy"></button>
+          <figcaption><b>2.10</b> · Revised controls.</figcaption>
+        </figure>
+        <figure class="sk">
+          <button type="button" data-full="img/p2-11.jpg" aria-label="Enlarge sketch: full setup"><img src="img/p2-11.jpg" alt="Full setup: built-in microphone picks up the expert saying good job, and the avatar mirrors their expression." loading="lazy"></button>
+          <figcaption><b>2.11</b> · Full setup with voice.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="todo col"><strong>To do</strong>
+      <ul>
+        <li>Prototype: photos, screen recording or a demo video of the built version.</li>
+        <li>Your contribution: which sketches and decisions were yours versus the team's.</li>
+        <li>Reflection: did the WASD revision work in testing? What would you change?</li>
+        <li>Credit Jashan for the hot/cold idea you built on, if they're a teammate.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GROWTH ============ -->
+<section class="sec" id="growth">
+  <div class="wrap">
+    <div class="sec-head col">
+      <span class="eyebrow">Growth</span>
+      <h2>What changed from Project 1 to Project 2 (so far)</h2>
+    </div>
+    <div class="col stack">
+      <p>In Project 1 I judged ideas with quick margin notes. In Project 2 so far I wrote explicit criteria first, ran a structured critique on every concept, and revised the design after a teammate's feedback.</p>
+      <div class="todo"><strong>To do</strong>Expand this in your own words, and update it once Project 2 is finished for Check-in 2. The top rubric band asks for approaches and tools <em>beyond what was covered in lecture</em>, so cite one or two papers or methods from the HCI literature that shaped your work (for example, on embodied interaction or remote collaboration awareness).</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GENAI ============ -->
+<section class="sec" id="ai">
+  <div class="wrap">
+    <div class="sec-head col">
+      <span class="eyebrow">Required by the course</span>
+      <h2>Use of generative AI</h2>
+    </div>
+    <div class="col stack">
+      <p><b>Tool:</b> Claude (Anthropic), October 26, 2026.</p>
+      <p><b>How it was used:</b> I gave Claude the portfolio brief, the rubric and my Project 1 and Project 2 sketch PDFs, and asked for a partially completed portfolio website. It produced the page layout, styling, navigation and image viewer, and drafted the captions and process summaries from my handwritten sketch notes.</p>
+      <p><b>Prompt:</b> "I need help with this portfolio assignment. I don't need the entire thing completed, just a partially completed website."</p>
+      <p><b>What is mine:</b> All sketches, design ideas, critiques and decisions shown here. I reviewed and edited the AI-drafted text, and wrote the design philosophy, contribution and reflection sections myself.</p>
+      <div class="todo"><strong>To do</strong>Check this matches what you actually did, and update it if you use AI again before the final submission.</div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">[Your Name] · CPSC 581, University of Calgary, Fall 2026 · All sketches by the author.</div>
+</footer>
+
+<dialog class="lb" id="lb" aria-label="Enlarged sketch">
+  <button type="button" id="lb-close">Close</button>
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+</dialog>
+
+<script>
+(function () {
+  var lb = document.getElementById('lb'), img = document.getElementById('lb-img'), cap = document.getElementById('lb-cap');
+  document.querySelectorAll('figure.sk button[data-full]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      img.src = b.dataset.full;
+      img.alt = b.querySelector('img').alt;
+      var fc = b.parentElement.querySelector('figcaption');
+      cap.textContent = fc ? fc.textContent : '';
+      lb.showModal();
+    });
+  });
+  document.getElementById('lb-close').addEventListener('click', function () { lb.close(); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+
+  // highlight the nav link for the section in view
+  var links = document.querySelectorAll('nav.top a.l');
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting) links.forEach(function (l) { l.classList.toggle('on', l.getAttribute('href') === '#' + e.target.id); });
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  document.querySelectorAll('section.sec').forEach(function (s) { io.observe(s); });
+})();
+</script>
+
+</body>
+</html>
