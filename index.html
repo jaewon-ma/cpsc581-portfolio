@@ -310,12 +310,12 @@ dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(
 
     <div class="col stack">
       <h3>Divergent concepts</h3>
-      <p>I sketched four ways an expert could guide a novice, then marked each one before choosing a direction.</p>
+      <p>I brainstormed four ways an expert could guide a novice, sketched three of them with an I like / I wish / What if critique, and picked one direction.</p>
     </div>
     <div class="verdicts">
       <div class="v"><span class="m no">✗</span><h4>Approval overlay</h4><p>The novice's actions wait for the expert to approve them, like a Git pull request. Too much of a hindrance.</p></div>
-      <div class="v"><span class="m mid">~</span><h4>"?" question cursor</h4><p>The novice switches to a "?" cursor to ask about any spot during a live lesson. Lets them express confusion, but the expert can only type or talk back.</p></div>
-      <div class="v"><span class="m mid">~</span><h4>Recorded sessions and hints</h4><p>The expert rewatches and "grades" the novice's work, or sets hints where the correct button shakes if the novice takes too long.</p></div>
+      <div class="v"><span class="m mid">~</span><h4>"?" question cursor</h4><p>The novice switches to a "?" cursor to ask about any spot during a live lesson. Lets them express confusion, but the expert can only answer by typing or talking.</p></div>
+      <div class="v"><span class="m mid">~</span><h4>Recorded sessions and hints</h4><p>The expert rewatches and "grades" the novice's work, or sets up a "test" with hints, where the correct button shakes if the novice takes too long.</p></div>
       <div class="v"><span class="m ok">✓</span><h4>Expert-controlled avatar</h4><p>A "Clippy" style avatar on the novice's screen that mirrors the expert's facial expressions, like a VTuber. Very expressive.</p></div>
     </div>
 
@@ -341,9 +341,9 @@ dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(
     <div class="two-col">
       <div class="stack">
         <h3>Converging on Cubey</h3>
-        <p>A cube is Blender's default object, so we designed a "Clippy" style avatar that is cute and relevant to the software. It is also much easier to animate than a full human avatar. We judged every idea after this against three criteria.</p>
+        <p>A cube is Blender's default object, so we designed a "Clippy" style avatar that is cute and relevant to the software. It is also much easier to animate than a full human avatar. We also wrote down three important criteria for the design.</p>
         <div class="criteria"><span>Intuitive for novice</span><span>Low effort for expert</span><span>Embodied and novel</span></div>
-        <p>I then sketched how Cubey shows the novice what to do without a second cursor. Just looking at a button is ambiguous when buttons are close together, so hints are two-tiered: Cubey looks first, then points and highlights. Building on Jashan's hot/cold idea, Cubey gives a thumbs up when the novice is doing well and a worried face when they're off track. It also has an explanation mode.</p>
+        <p>I then sketched how Cubey shows the novice what to do without a second cursor. Just looking at a button is ambiguous when buttons are close together, so hints are two-tiered: Cubey looks first, then points and highlights. To improve on Jashan's hot/cold idea, Cubey gives a thumbs up when the novice is doing well, and puts a hand up with a nervous face when they're off track. That last one is still marked as unsure. Cubey also has an explanation mode.</p>
       </div>
       <figure class="sk">
         <button type="button" data-full="img/p2-05.jpg" aria-label="Enlarge sketch: hint storyboard"><img src="img/p2-05.jpg" alt="Problem statement, criteria and a six-panel storyboard of avatar hint behaviours, each marked with a check, cross or squiggle." loading="lazy"></button>
@@ -373,7 +373,7 @@ dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(
       </figure>
       <figure class="sk">
         <button type="button" data-full="img/p2-08.jpg" aria-label="Enlarge sketch: expert side"><img src="img/p2-08.jpg" alt="Storyboard: Cubey says good job after the novice drags the object, then the expert at their desk with a webcam." loading="lazy"></button>
-        <figcaption><b>Sketch 2.8</b> · Cubey cheers the novice on, then the same moment from the expert's side.</figcaption>
+        <figcaption><b>Sketch 2.8</b> · Cubey says "Good job!" after the novice drags the object, then the lesson from the expert's side.</figcaption>
       </figure>
       <figure class="sk">
         <button type="button" data-full="img/p2-09.jpg" aria-label="Enlarge sketch: expert pointing with webcam"><img src="img/p2-09.jpg" alt="Expert pointing at the webcam while the software mirrors the movement to the avatar, with a teammate's critique written in blue." loading="lazy"></button>
@@ -386,7 +386,7 @@ dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(
         <span class="eyebrow" style="color:var(--pen)">Revision after critique</span>
         <h3>From pointing at a webcam to WASD and a mouse</h3>
         <p>A teammate pointed out that hand tracking is hard for pointing, especially if the expert doesn't have room to move their arms in view of the webcam, and it would also be hard to highlight the correct button.</p>
-        <p>We moved avatar movement to WASD (or the arrow keys) so the expert's right hand is free for the mouse. Left-click makes Cubey point at that spot, and right-click highlights the selected button or area. The expert's cursor is only visible on their own monitor. The webcam still mirrors the expert's expressions, and the expert can speak or type to accommodate accessibility needs, such as a mute expert.</p>
+        <p>We moved avatar movement to WASD (or the arrow keys) so the expert's right hand is free for the mouse. Left-click makes Cubey point at that spot, and right-click highlights the selected button or area. The expert's cursor is only visible on their own monitor. The webcam still mirrors the expert's movements and expressions, and the expert can speak or type to accommodate accessibility needs, such as a mute expert.</p>
       </div>
       <div class="figs" style="grid-template-columns:1fr 1fr">
         <figure class="sk">
@@ -401,14 +401,14 @@ dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(
     </div>
 
     <div class="col stack">
-      <h3>From sketch to prototype</h3>
+      <h3>Key decisions</h3>
       <ul>
-        <li><b>Chose the avatar from Sketch 2.4.</b> It was the only concept that showed the expert's body language, which the other sketches kept asking for in their "What if" notes.</li>
-        <li><b>Borrowed hints from the other ideas.</b> The brainstorm's hint, where the correct button shakes, carried into Cubey's look, then point and highlight.</li>
-        <li><b>Hands moved from the webcam to the keyboard and mouse.</b> After the critique, the webcam handles expressions only, and pointing moved to the mouse for precision.</li>
+        <li><b>Chose the avatar from Sketch 2.4.</b> The overlay's critique asked for a way to show body language, and the avatar was the only concept that did.</li>
+        <li><b>Kept the idea of hints.</b> The overlay's critique also wished for some sort of hint, so Cubey gives two-tiered hints: look first, then point and highlight.</li>
+        <li><b>Pointing moved from the webcam to the mouse.</b> After the critique, the mouse handles pointing and highlighting, WASD moves Cubey, and the webcam still mirrors the expert's body language.</li>
       </ul>
       <h3>What I'd do differently</h3>
-      <p>[Your reflection: what you would change about the sketches or the process, and whether the WASD revision held up once the prototype was built.]</p>
+      <p>[Your reflection: what you would change about the sketches or the process.]</p>
     </div>
   </div>
 </section>
