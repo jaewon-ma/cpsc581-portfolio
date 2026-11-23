@@ -474,7 +474,7 @@ dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(
 
     <div class="col stack">
       <h3>Converging on the turntable</h3>
-      <p>After critiquing everyone's sketches, the group chose to build a motorized lazy susan that diners control with hand gestures, the direction of Sketch 3.1. It keeps a familiar object that is already about sharing food, and takes the physical effort out of passing dishes around the table.</p>
+      <p>After critiquing everyone's sketches, the group chose to build a motorized lazy susan that diners control with their voice and hand gestures, the direction of Sketch 3.1. Adding voice control was my idea. It keeps a familiar object that is already about sharing food, and takes the physical effort out of passing dishes around the table.</p>
     </div>
 
     <div class="two-col">
@@ -511,10 +511,10 @@ dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(
       <li><div><h4>Test the friction wheel by hand</h4><p>Holding the motor and wheel against the edge of the turntable to check that friction alone could turn it, and where the wheel should touch. (Photos 3.3, 3.4)</p></div></li>
       <li><div><h4>Mount the motor on a bracket</h4><p>Bolting the stepper to a galvanized steel corner bracket so it holds the wheel at a fixed height and pressure against the turntable. (Photos 3.5 to 3.7)</p></div></li>
       <li><div><h4>Print an axle for the wheel</h4><p>A printed axle joins the wheel to the motor's shaft, in two lengths. (Photo 3.8 and Model 3.1)</p></div></li>
-      <li><div><h4>Wire the inputs and assemble</h4><p>Mounting the Arduino, joystick, IR sensor and ultrasonic sensor on the base board, then setting the turntable on top. (Photo 3.1)</p></div></li>
+      <li><div><h4>Wire the inputs and assemble</h4><p>Mounting the Arduino, joystick, IR sensor and ultrasonic sensor on the base board, then setting the turntable on top. (Photos 3.1, 3.2)</p></div></li>
     </ol>
     </div>
-      <figure class="sk"><button type="button" data-full="img/p3-02-drive.jpg" aria-label="Enlarge photo 3.2" style="aspect-ratio:625/1133;max-width:340px"><img src="img/p3-02-drive.jpg" alt="Close-up of the drive, labelled: friction wheel, 3D printed axle and stepper motor on a steel bracket at the edge of the base board." loading="lazy"></button><figcaption><b>Photo 3.2</b> · The drive, labelled.</figcaption></figure>
+      <figure class="sk"><button type="button" data-full="img/p3-02.jpg" aria-label="Enlarge photo 3.2" style="aspect-ratio:3/4"><img src="img/p3-02.jpg" alt="Base board seen from above with the turntable removed, labelled: friction wheel, 3D printed axle, stepper motor, Arduino, IR sensor, joystick, and ultrasonic sensor on a breadboard." loading="lazy" style="object-position:center"></button><figcaption><b>Photo 3.2</b> · The base board with the turntable removed, labelled.</figcaption></figure>
     </div>
 
     <div class="figs" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px">
@@ -564,6 +564,7 @@ dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(
       </ul>
       <h3>What's incomplete</h3>
       <ul>
+        <li>Voice control isn't implemented yet.</li>
         <li>The "gesture" is detected only by the ultrasonic sensor sensing a hand. It doesn't recognize specific hand movements or positions.</li>
         <li>The drive sits beside the turntable on a separate board. Ideally it would be geared and built into the base of the lazy susan.</li>
       </ul>
