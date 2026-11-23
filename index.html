@@ -164,8 +164,23 @@ dialog.lb img { display: block; max-width: 100%; max-height: 84vh; border-radius
 dialog.lb p { color: #fff; margin-top: 8px; font-size: .95rem; }
 dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(--f-body); padding: 6px 12px; border-radius: 4px; border: 0; cursor: pointer; background: #fff; color: #111; }
 
+/* Project 3: inline placeholder and the STL viewer */
+.todo-inline { background: var(--todo-bg); color: var(--todo-ink); border: 1.5px dashed var(--todo-line); border-radius: 3px; padding: 0 4px; }
+.stl { position: relative; aspect-ratio: 4 / 3; background: var(--card); border: 1.5px solid var(--ink); border-radius: 4px; overflow: hidden; }
+.stl canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+.stl canvas:active { cursor: grabbing; }
+.stl .still { width: 100%; height: 100%; object-fit: contain; display: block; }
+.stl.live .still { display: none; }
+.stl .hint { position: absolute; left: 10px; bottom: 8px; font: .95rem var(--f-hand); color: var(--ink-soft); pointer-events: none; display: none; }
+.stl.live .hint { display: block; }
+.two-col.wide-l { grid-template-columns: 1.6fr 1fr; }
+.stl-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+.stl-tools[hidden] { display: none; }
+.stl-tools button { font: .88rem var(--f-body); padding: 4px 12px; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--card); color: var(--ink); cursor: pointer; }
+.stl-tools button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
 @media (max-width: 760px) {
-  .hero-grid, .two-col { grid-template-columns: 1fr; }
+  .hero-grid, .two-col, .two-col.wide-l { grid-template-columns: 1fr; }
   .ilwi { grid-template-columns: 1fr; }
   .ilwi > div { border-right: 0; border-bottom: 1.5px solid var(--ink); }
   .ilwi > div:last-child { border-bottom: 0; }
@@ -173,6 +188,8 @@ dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(
   body { font-size: 16px; }
 }
 </style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module" src="js/stl-viewer.js"></script>
 </head>
 <body>
 
@@ -184,6 +201,7 @@ dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(
       <li><a class="l" href="#philosophy">Philosophy</a></li>
       <li><a class="l" href="#p1">Project 1</a></li>
       <li><a class="l" href="#p2">Project 2</a></li>
+      <li><a class="l" href="#p3">Project 3</a></li>
       <!-- <li><a class="l" href="#growth">Growth</a></li> -->
       <li><a class="l" href="#ai">GenAI use</a></li>
     </ul>
@@ -415,6 +433,147 @@ dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(
   </div>
 </section>
 
+<!-- ============ PROJECT 3 ============ -->
+<section class="sec" id="p3">
+  <div class="wrap stack" style="gap:32px">
+    <div class="sec-head col">
+      <span class="eyebrow">Group Project 3 · Individual contributions</span>
+      <h2>A lazy susan you can turn with a wave</h2>
+      <p>Concept sketches for augmenting a shared meal, and the motorized lazy susan that grew out of my first one.</p>
+    </div>
+
+    <p>The brief asked us to augment one or more everyday objects with physical computing, using sensor inputs and electronic, physical outputs, to improve the experience of people eating together. I sketched three ideas and critiqued them with my group using I like / I wish / What if. My first sketch started from a problem I've seen at dim sum: a lazy susan loaded with dishes gets heavy, especially for a grandparent, so what if you could just "swipe" the table and a motor turned it for you?</p>
+
+    <div class="todo col"><strong>To do</strong>In a sentence or two, add what you personally did on the build (for example the axle model, the motor bracket, wiring or code), so this section shows your own contribution.</div>
+
+    <div class="col stack">
+      <h3>Divergent concepts</h3>
+      <p>I sketched three very different ways to augment a shared meal: changing the table, the diner, and who serves the food.</p>
+    </div>
+    <div class="verdicts">
+      <div class="v"><span class="m ok">✓</span><h4>Hand-gesture lazy susan</h4><p>Swipe in the air and a motor turns the table. Easier for grandma to turn. This is the one we built.</p></div>
+      <div class="v"><span class="m no">✗</span><h4>AR food glasses</h4><p>Smart glasses label allergens and dietary info, and connect diners far apart for a shared AR "mukbang" with auto-translation.</p></div>
+      <div class="v"><span class="m no">✗</span><h4>Robot food butler</h4><p>A small robot on the table listens for requests like "Can you give the fries to Timmy?" and delivers the dish.</p></div>
+    </div>
+    <div class="todo col"><strong>To do</strong>Add a few words on why you set aside the AR glasses and the robot butler, the way you did for Projects 1 and 2.</div>
+
+    <div class="figs" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+      <figure class="sk">
+        <button type="button" data-full="img/p3-s1.jpg" aria-label="Enlarge sketch: hand-gesture lazy susan" style="aspect-ratio:865/483"><img src="img/p3-s1.jpg" alt="Sketch: a dim sum lazy susan crowded with dishes, noted can get heavy especially for grandma, beside a hand-gesture turning table where a motor turns the table when you swipe." loading="lazy" style="object-fit:contain"></button>
+        <figcaption><b>Sketch 3.1</b> · Hand-gesture lazy susan. A loaded lazy susan "can get heavy, especially for grandma," so you "swipe" the table and a motor turns it.</figcaption>
+      </figure>
+      <figure class="sk">
+        <button type="button" data-full="img/p3-s2.jpg" aria-label="Enlarge sketch: AR food glasses" style="aspect-ratio:860/655"><img src="img/p3-s2.jpg" alt="Sketch: AR glasses labelling a dish as vegan and another as containing gluten and lactose, then a shared AR meal with remote diners and a speech bubble translating Hola to Hello." loading="lazy" style="object-fit:contain"></button>
+        <figcaption><b>Sketch 3.2</b> · AR food glasses. Food analysis, plus an AR "mukbang" with diners elsewhere and an auto translator.</figcaption>
+      </figure>
+      <figure class="sk">
+        <button type="button" data-full="img/p3-s3.jpg" aria-label="Enlarge sketch: robot food butler" style="aspect-ratio:903/415"><img src="img/p3-s3.jpg" alt="Sketch: a diner asks can you give the fries to Timmy, and a small robot on the table answers OK and carries the fries while Timmy says yay." loading="lazy" style="object-fit:contain"></button>
+        <figcaption><b>Sketch 3.3</b> · Robot food butler, with audio and video input and audio and physical output.</figcaption>
+      </figure>
+    </div>
+
+    <div class="col stack">
+      <h3>Converging on the turntable</h3>
+      <p>After critiquing everyone's sketches, the group chose to build a motorized lazy susan that diners control with their voice and hand gestures, the direction of Sketch 3.1. Adding voice control was my idea. It keeps a familiar object that is already about sharing food, and takes the physical effort out of passing dishes around the table.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="stack">
+        <h3>The system</h3>
+        <p>An ordinary wooden lazy susan sits on a base board. Underneath, a 28BYJ-48 5&nbsp;V stepper motor is bolted to a steel bracket, and a rubber friction wheel on a 3D-printed axle presses against the turntable, so when the motor turns, friction carries the turntable with it. An Arduino on the same board reads a joystick, an IR sensor and an ultrasonic sensor.</p>
+        <div class="tbl-wrap">
+          <table style="min-width:0">
+            <thead><tr><th>Component</th><th>Type</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr><td>28BYJ-48 stepper motor (5&nbsp;V DC)</td><td>Output</td><td>Drives the friction wheel that turns the lazy susan.</td></tr>
+              <tr><td>Friction wheel on printed axle</td><td>Mechanism</td><td>Couples the motor shaft to the turntable.</td></tr>
+              <tr><td>Ultrasonic sensor</td><td>Input</td><td>Detects a hand to spin the platter.</td></tr>
+              <tr><td>IR sensor</td><td>Input</td><td><span class="todo-inline">[What it does]</span></td></tr>
+              <tr><td>Joystick module</td><td>Input</td><td><span class="todo-inline">[What it does]</span></td></tr>
+              <tr><td>Arduino</td><td>Controller</td><td>Reads the sensors and steps the motor.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <figure class="sk">
+        <button type="button" data-full="img/p3-01.jpg" aria-label="Enlarge photo: finished turntable" style="aspect-ratio:3/4"><img src="img/p3-01.jpg" alt="Finished lazy susan on its base board on a dining table, with the motor bracket and ultrasonic sensor visible underneath." loading="lazy" style="object-position:center"></button>
+        <figcaption><b>Photo 3.1</b> · The finished turntable on a dining table.</figcaption>
+      </figure>
+    </div>
+
+    <div class="two-col wide-l">
+    <div class="stack">
+    <div class="stack">
+      <h3>Building the drive</h3>
+      <p>Getting a small stepper to turn a heavy wooden turntable was the main mechanical problem. These photos follow the build in order.</p>
+    </div>
+    <ol class="steps">
+      <li><div><h4>Test the friction wheel by hand</h4><p>Holding the motor and wheel against the edge of the turntable to check that friction alone could turn it, and where the wheel should touch. (Photos 3.3, 3.4)</p></div></li>
+      <li><div><h4>Mount the motor on a bracket</h4><p>Bolting the stepper to a galvanized steel corner bracket so it holds the wheel at a fixed height and pressure against the turntable. (Photos 3.5 to 3.7)</p></div></li>
+      <li><div><h4>Print an axle for the wheel</h4><p>A printed axle joins the wheel to the motor's shaft, in two lengths. (Photo 3.8 and Model 3.1)</p></div></li>
+      <li><div><h4>Wire the inputs and assemble</h4><p>Mounting the Arduino, joystick, IR sensor and ultrasonic sensor on the base board, then setting the turntable on top. (Photos 3.1, 3.2)</p></div></li>
+    </ol>
+    </div>
+      <figure class="sk"><button type="button" data-full="img/p3-02.jpg" aria-label="Enlarge photo 3.2" style="aspect-ratio:3/4"><img src="img/p3-02.jpg" alt="Base board seen from above with the turntable removed, labelled: friction wheel, 3D printed axle, stepper motor, Arduino, IR sensor, joystick, and ultrasonic sensor on a breadboard." loading="lazy" style="object-position:center"></button><figcaption><b>Photo 3.2</b> · The base board with the turntable removed, labelled.</figcaption></figure>
+    </div>
+
+    <div class="figs" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px">
+      <figure class="sk"><button type="button" data-full="img/p3-03.jpg" aria-label="Enlarge photo 3.3" style="aspect-ratio:3/4"><img src="img/p3-03.jpg" alt="Hand holding the stepper motor and wheel beside the edge of the wooden turntable." loading="lazy"></button><figcaption><b>3.3</b> · First fit against the edge</figcaption></figure>
+      <figure class="sk"><button type="button" data-full="img/p3-04.jpg" aria-label="Enlarge photo 3.4" style="aspect-ratio:3/4"><img src="img/p3-04.jpg" alt="Stepper motor with the rubber wheel attached, held under the turntable." loading="lazy"></button><figcaption><b>3.4</b> · Wheel on the motor</figcaption></figure>
+      <figure class="sk"><button type="button" data-full="img/p3-05.jpg" aria-label="Enlarge photo 3.5" style="aspect-ratio:3/4"><img src="img/p3-05.jpg" alt="Stepper motor bolted to a steel bracket, with a drill and parts on the table behind." loading="lazy"></button><figcaption><b>3.5</b> · Bolting to the bracket</figcaption></figure>
+      <figure class="sk"><button type="button" data-full="img/p3-06.jpg" aria-label="Enlarge photo 3.6" style="aspect-ratio:3/4"><img src="img/p3-06.jpg" alt="Back of the steel bracket with the motor mounted, wheel lying nearby." loading="lazy"></button><figcaption><b>3.6</b> · Bracket, back</figcaption></figure>
+      <figure class="sk"><button type="button" data-full="img/p3-07.jpg" aria-label="Enlarge photo 3.7" style="aspect-ratio:3/4"><img src="img/p3-07.jpg" alt="Front of the bracket showing the 28BYJ-48 5V DC stepper motor label, with the wheel mounted." loading="lazy"></button><figcaption><b>3.7</b> · 28BYJ-48, wheel mounted</figcaption></figure>
+      <figure class="sk"><button type="button" data-full="img/p3-08.jpg" aria-label="Enlarge photo 3.8" style="aspect-ratio:3/4"><img src="img/p3-08.jpg" alt="Rubber wheel on a grey 3D-printed axle, held between two fingers." loading="lazy"></button><figcaption><b>3.8</b> · Wheel on the printed axle</figcaption></figure>
+    </div>
+
+    <div class="two-col">
+      <div class="stack">
+        <span class="eyebrow" style="color:var(--pen)">3D model · drag to rotate</span>
+        <h3>The printed axle, short and long</h3>
+        <p>Both axles are 10&nbsp;mm across. The short one is 19&nbsp;mm long and the long one is 29&nbsp;mm. The bottom has a D-shaped socket that fits over the stepper's flatted shaft, and a thin 3&nbsp;mm pin on top carries the wheel.</p>
+        <div class="todo"><strong>To do</strong>Why two lengths, and which one is in the final build? Did you model and print it yourself?</div>
+        <div class="stl-tools" role="group" aria-label="Camera view" hidden>
+          <button type="button" data-view="iso" aria-pressed="true">Angled</button>
+          <button type="button" data-view="front" aria-pressed="false">Side</button>
+          <button type="button" data-view="top" aria-pressed="false">Top</button>
+          <button type="button" data-view="bottom" aria-pressed="false">Bottom</button>
+          <button type="button" data-spin aria-pressed="false">Spin</button>
+        </div>
+      </div>
+      <div class="stack" style="gap:8px">
+        <div class="stl" id="stl" data-src="models/p3-axles.stl" data-label="Interactive 3D model of the two printed axles, short and long. Drag to rotate.">
+          <img class="still" src="img/p3-axle-iso.png" alt="Rendered 3D model of the two printed axles, short and long, side by side.">
+          <span class="hint">drag to rotate · scroll to zoom</span>
+        </div>
+        <p style="font-size:.92rem;color:var(--ink-soft)"><b style="color:var(--ink)">Model 3.1</b> · <a href="models/p3-axles.stl" download>Download the STL</a></p>
+      </div>
+    </div>
+
+    <div class="figs" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px">
+      <figure class="sk"><button type="button" data-full="img/p3-axle-front.png" aria-label="Enlarge render: side view" style="aspect-ratio:4/3"><img src="img/p3-axle-front.png" alt="Side view render of both axles: a 10 mm body with a thin pin on top." loading="lazy" style="object-fit:contain"></button><figcaption><b>Side</b></figcaption></figure>
+      <figure class="sk"><button type="button" data-full="img/p3-axle-top.png" aria-label="Enlarge render: top view" style="aspect-ratio:4/3"><img src="img/p3-axle-top.png" alt="Top view render of both axles showing the wheel pin." loading="lazy" style="object-fit:contain"></button><figcaption><b>Top</b> · wheel pin</figcaption></figure>
+      <figure class="sk"><button type="button" data-full="img/p3-axle-bottom.png" aria-label="Enlarge render: bottom view" style="aspect-ratio:4/3"><img src="img/p3-axle-bottom.png" alt="Bottom view render of both axles showing the D-shaped socket for the motor shaft." loading="lazy" style="object-fit:contain"></button><figcaption><b>Bottom</b> · D-shaped motor socket</figcaption></figure>
+    </div>
+
+    <div class="col stack">
+      <h3>Key decisions</h3>
+      <ul>
+        <li><b>Augment an object diners already share.</b> A lazy susan is already about passing food around a table, so motorizing it keeps the object familiar while making it easier to use.</li>
+        <li><b>Drive the edge with a friction wheel.</b> <span class="todo-inline">[Why this instead of a motor in the centre?]</span></li>
+        <li><b>A printed axle to join the wheel and motor.</b> The wheel didn't fit the stepper's shaft, so the axle adapts one to the other.</li>
+      </ul>
+      <h3>What's incomplete</h3>
+      <ul>
+        <li>Voice control isn't implemented yet.</li>
+        <li>The "gesture" is detected only by the ultrasonic sensor sensing a hand. It doesn't recognize specific hand movements or positions.</li>
+        <li>The drive sits beside the turntable on a separate board. Ideally it would be geared and built into the base of the lazy susan.</li>
+      </ul>
+      <h3>What I'd do differently</h3>
+      <div class="todo"><strong>To do</strong>Your reflection, in your own words.</div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ GROWTH ============ -->
 <!-- <section class="sec" id="growth">
   <div class="wrap">
@@ -440,7 +599,8 @@ dialog.lb button { position: absolute; top: 8px; right: 8px; font: 700 1rem var(
       <p><b>Tool:</b> Claude (Anthropic)</p>
       <p><b>How it was used:</b> I gave Claude the portfolio brief and my Project 1 sketch PDFs, and asked for a partially completed portfolio website. It produced the page layout, styling, navigation and image viewer. For Part 2, I instructed Claude to use the same style and approach as Part 1.</p>
       <p><b>Prompt (Project 1):</b> "I am working on an individual portfolio assignment for a Human-Computer Interaction course. I've attached the assignment brief and my concept sketches from Project 1. I need a skeleton portfolio website so I can focus on documenting my process."</p>
-      <p><b>Prompt (Project 2):</b> "Use these sketches for the Part 2 section of my portfolio. Model it exactly the same as Part 1."</p>      
+      <p><b>Prompt (Project 2):</b> "Use these sketches for the Part 2 section of my portfolio. Model it exactly the same as Part 1."</p>
+      <p><b>Prompt (Project 3):</b> I gave Claude my build photos, the axle model, the brief and my sketches, and asked it to add a Project 3 section in the same style: "dont mention any of my other group members ideas, this is a personal portfolio." It also rendered the axle model and built the interactive 3D viewer.</p>      
       <p><b>What is mine:</b> All sketches, design ideas, critiques and decisions shown here. I reviewed and edited any AI-drafted text, and wrote the design philosophy, contribution and reflection sections myself.</p>
     </div>
   </div>
